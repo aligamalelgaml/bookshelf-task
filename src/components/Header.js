@@ -9,7 +9,7 @@ class Header extends React.Component {
     return (
       <header className='header'>
       <Container>
-        <Row className='text-center pt-4'>
+        <Row className='text-center p-4'>
           <h1 className='fw-bold text-white'>MyReads</h1>
         </Row>
       </Container>
