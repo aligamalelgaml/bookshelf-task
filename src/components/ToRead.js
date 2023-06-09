@@ -1,17 +1,17 @@
 import React from 'react';
 import { Container, Card, Row, Col } from 'react-bootstrap';
 
-class CurrentlyReading extends React.Component {
+class ToRead extends React.Component {
 
     render() {
         return (
             <>
                 <Container className="mb-4">
                     <Row>
-                        <h3 className='mt-3'>Currently Reading:</h3>
+                        <h3 className='mt-3'>To Read:</h3>
                         <hr/>
 
-                        {this.props.currentBooks.map(book => (
+                        {this.props.toReadBooks.map(book => (
                             <Col xs={3} key={book.key} className='mt-4'>
                                 <Card className='h-100'>
                                     <Card.Img variant="top" src={`https://covers.openlibrary.org/b/id/${book.cover_i}-M.jpg`} />
@@ -45,4 +45,4 @@ class CurrentlyReading extends React.Component {
 
 }
 
-export default CurrentlyReading;
+export default ToRead;

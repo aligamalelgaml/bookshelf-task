@@ -2,13 +2,9 @@ import React from 'react';
 import { Button, Modal, Card, Row, Col } from 'react-bootstrap';
 import axios from 'axios';
 
-// TODO: Debounce bookSearch method, format results into cards, save selected books to localstorage.
-
-
 class SearchBook extends React.Component {
 
     state = { showModal: false, results: [], loading: false };
-    targetRefs = [];
 
     fetchBooks = (title) => {
         console.log("Fetching data from API..");
@@ -35,24 +31,16 @@ class SearchBook extends React.Component {
         }
     }
 
-    addBook = (book) => {
-        console.log("Adding.. + " + book.title)
-        const bookList = localStorage.getItem("currentBooks") ? JSON.parse(localStorage.getItem("currentBooks")) : [];
-        bookList.push(book);
-        localStorage.setItem("currentBooks", JSON.stringify(bookList))
-    }
-
-
-
-
     render() {
         console.log(this.state.results);
         return (
             <>
                 <footer className='footer text-end pe-4'>
-                    <Button className='rounded-circle fs-4' variant="primary" onClick={this.toggleModal}>
-                        +
-                    </Button>
+                    <div className='footer-content'>
+                        <Button className='circle fs-1' variant="primary" onClick={this.toggleModal}>
+                            +
+                        </Button>
+                    </div>
                 </footer>
 
                 <Modal show={this.state.showModal} onHide={this.toggleModal} fullscreen>
@@ -81,13 +69,13 @@ class SearchBook extends React.Component {
                                                                     return <span key={index}>{author},</span>;
                                                                 })
                                                             ) : (
-                                                                <p>N/A</p>
+                                                                <span>N/A</span>
                                                             )}
                                                         </div>
                                                     </Card.Text>
                                                 </Card.Body>
                                                 <Card.Footer>
-                                                    <Button key={book.key} className='rounded-circle' variant="primary" onClick={this.addBook.bind(this, book)}>
+                                                    <Button key={book.key} className='rounded-circle' variant="primary" onClick={this.props.addBookToCurrent.bind(this, book)}>
                                                         +
                                                     </Button>
                                                 </Card.Footer>
