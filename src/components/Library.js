@@ -13,6 +13,11 @@ class Library extends React.Component {
         readBooks: localStorage.getItem("readBooks") ? JSON.parse(localStorage.getItem("readBooks")) : []
     };
 
+    /**
+     * Accepts a book object as well as a target string that is supposed to match to one of this.state's objects.
+     * @param {*} book Book json object
+     * @param {string} target String matching one of this.state's objects.
+     */
     __addBook(book, target) {
         console.log("Adding: " + book.title + " to " + target);
         const bookList = this.state[target];
@@ -34,6 +39,13 @@ class Library extends React.Component {
         localStorage.setItem(target, JSON.stringify(bookList));
     }
 
+
+    /**
+     * Returns a promise that allows for insertion of books after removal is completely finished.
+     * @param {*} book Book json object
+     * @param {string} source String matching one of this.state's objects.
+     * @returns A fulfilled promise once this.setState finishes updating it's statesd. 
+     */
     __removeBook(book, source) {
         return new Promise((resolve, reject) => {
             console.log("Removing: " + book.title + " from " + source)
@@ -49,10 +61,23 @@ class Library extends React.Component {
         })
     }
 
+    /**
+     * Simple helper function to filter books with matching ID already existing in our state objects.
+     * @param {*} listBook | one of the books we are iterating over
+     * @param {*} book | book we are attempting to match.
+     * @returns {Array} | Array with book matched filtered out.
+     */
     __filterID = (listBook, book) => {
         return listBook.key !== book.key;
     }
 
+    
+    /**
+     * Main function responisble for all book object interactions.
+     * @param {*} book | book to take action on.
+     * @param {*} target | target string to match with one of this.state's objects that helps determine where addition will take place.
+     * @param {*} source | source string to match with one of this.state's objects that helps determine where removal will take place.
+     */
     moveBook = (book, target, source) => {
         if (source !== null) {
           this.__removeBook(book, source).then(() => {

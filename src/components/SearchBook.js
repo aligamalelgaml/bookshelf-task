@@ -17,6 +17,10 @@ class SearchBook extends React.Component {
         }));
     };
 
+    /**
+     * Main function for making API calls. Utilizes helper function __debounce to debounce keystrokes and prevent spamming API calls on each input field onChange event.
+     * @param {*} e | received input field 
+     */
     debouncedBookSearch = (e) => {
         this.setState({ loading: true });
         clearTimeout(this.timeout);
