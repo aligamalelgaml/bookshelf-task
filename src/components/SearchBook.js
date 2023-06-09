@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, Modal, Card, Row, Col } from 'react-bootstrap';
+import { Button, Dropdown, Modal, Card, Row, Col, Form, InputGroup } from 'react-bootstrap';
 import axios from 'axios';
 
 class SearchBook extends React.Component {
@@ -43,16 +43,19 @@ class SearchBook extends React.Component {
                 </footer>
 
                 <Modal show={this.state.showModal} onHide={this.toggleModal} fullscreen>
-                    <Modal.Header closeButton>
-                        <Modal.Title>Search Books</Modal.Title>
+                    <Modal.Header>
+                        <InputGroup>
+                            <InputGroup.Text className='clickable'><span className='gg-chevron-left' onClick={this.toggleModal}/></InputGroup.Text>
+                            <Form.Control placeholder="Enter your search here.." onChange={this.debouncedBookSearch}/>
+                            <InputGroup.Text><span className='gg-search'/></InputGroup.Text>
+                        </InputGroup>
                     </Modal.Header>
 
                     <Modal.Body>
-                        <input type="text" onChange={this.debouncedBookSearch} />
 
                         <Row className='mt-4'>
                             {this.state.loading ? (
-                                <span>Loading...</span>
+                                <span className='loader'></span>
                             ) : this.state.results && this.state.results.length > 0 ? (
                                 this.state.results.map(book => (
                                     <Col xs={2} key={book.key} className='mt-5'>
@@ -77,15 +80,24 @@ class SearchBook extends React.Component {
                                                 </Card.Text>
                                             </Card.Body>
                                             <Card.Footer>
-                                                <Button key={book.key} className='rounded-circle' variant="primary" onClick={this.props.addBookToCurrent.bind(this, book, "currentBooks", null)}>
-                                                    +
-                                                </Button>
+
+                                                <Dropdown drop='down'>
+                                                    <Dropdown.Toggle className='circle-small fs-5' variant="success" id="dropdown-basic" />
+
+                                                    <Dropdown.Menu>
+                                                        <Dropdown.Item disabled="true" href="#">Move</Dropdown.Item>
+                                                        <Dropdown.Item onClick={this.props.move.bind(this, book, "toReadBooks", null)} href="#">Want To Read Books</Dropdown.Item>
+                                                        <Dropdown.Item onClick={this.props.move.bind(this, book, "readBooks", null)} href="#">Read Books</Dropdown.Item>
+                                                        <Dropdown.Item onClick={this.props.move.bind(this, book, "currentBooks", null)} href="#">Currently Reading</Dropdown.Item>
+                                                    </Dropdown.Menu>
+                                                </Dropdown>
+
                                             </Card.Footer>
                                         </Card>
                                     </Col>
                                 ))
                             ) : (
-                                <span>No results found.</span>
+                                <span className='text-center mt-5'>No results found or no input yet.</span>
                             )}
                         </Row>
 

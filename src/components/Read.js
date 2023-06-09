@@ -7,7 +7,7 @@ class Read extends React.Component {
             <>
                 <Container className="mb-4">
                     <Row>
-                        <h3 className="mt-3 fw-bold">To Read:</h3>
+                        <h3 className="mt-3 fw-bold">Read:</h3>
                         <hr />
 
                         {this.props.readBooks.map((book) => (
