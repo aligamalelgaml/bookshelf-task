@@ -18,7 +18,7 @@ class SearchBook extends React.Component {
     };
 
     debouncedBookSearch = (e) => {
-        this.setState({loading: true});
+        this.setState({ loading: true });
         clearTimeout(this.timeout);
 
         const debouncedSearch = this.__debounce(this.fetchBooks);
@@ -27,7 +27,7 @@ class SearchBook extends React.Component {
 
     __debounce(callback, delay = 2000) {
         return (...args) => {
-            this.timeout = setTimeout(() => {callback(...args)}, delay);
+            this.timeout = setTimeout(() => { callback(...args) }, delay);
         }
     }
 
@@ -51,42 +51,42 @@ class SearchBook extends React.Component {
                         <input type="text" onChange={this.debouncedBookSearch} />
 
                         <Row className='mt-4'>
-                                {this.state.loading ? (
-                                    <span>Loading...</span>
-                                ) : this.state.results && this.state.results.length > 0 ? (
-                                    this.state.results.map(book => (
-                                        <Col xs={2} key={book.key} className='mt-5'>
-                                            <Card className='h-100'>
-                                                <Card.Img variant="top" src={`https://covers.openlibrary.org/b/id/${book.cover_i}-M.jpg`}/>
-                                                <Card.Title className='mt-3 ms-3'><span className='fs-5 fw-bold'>{book.title}</span></Card.Title>
+                            {this.state.loading ? (
+                                <span>Loading...</span>
+                            ) : this.state.results && this.state.results.length > 0 ? (
+                                this.state.results.map(book => (
+                                    <Col xs={2} key={book.key} className='mt-5'>
+                                        <Card className='h-100'>
+                                            <Card.Img variant="top" src={`https://covers.openlibrary.org/b/id/${book.cover_i}-M.jpg`} />
+                                            <Card.Title className='mt-3 ms-3'><span className='fs-5 fw-bold'>{book.title}</span></Card.Title>
 
-                                                <Card.Body>
-                                                    <Card.Text>
-                                                        <span>
-                                                            {book.author_name ? (
-                                                                book.author_name.map((author, index) => (
-                                                                    <React.Fragment key={index}>
+                                            <Card.Body>
+                                                <Card.Text>
+                                                    <span>
+                                                        {book.author_name ? (
+                                                            book.author_name.map((author, index) => (
+                                                                <React.Fragment key={index}>
                                                                     <span className='text-grey fw-bold'>{author}</span>
                                                                     {index !== book.author_name.length - 1 && <span className='text-grey'>, </span>}
-                                                                    </React.Fragment>
-                                                                ))
-                                                            ) : (
-                                                                <span>N/A</span>
-                                                            )}
-                                                        </span>
-                                                    </Card.Text>
-                                                </Card.Body>
-                                                <Card.Footer>
-                                                    <Button key={book.key} className='rounded-circle' variant="primary" onClick={this.props.addBookToCurrent.bind(this, book, "currentBooks", null)}>
-                                                        +
-                                                    </Button>
-                                                </Card.Footer>
-                                            </Card>
-                                        </Col>
-                                    ))
-                                ) : (
-                                    <span>No results found.</span>
-                                )}
+                                                                </React.Fragment>
+                                                            ))
+                                                        ) : (
+                                                            <span>N/A</span>
+                                                        )}
+                                                    </span>
+                                                </Card.Text>
+                                            </Card.Body>
+                                            <Card.Footer>
+                                                <Button key={book.key} className='rounded-circle' variant="primary" onClick={this.props.addBookToCurrent.bind(this, book, "currentBooks", null)}>
+                                                    +
+                                                </Button>
+                                            </Card.Footer>
+                                        </Card>
+                                    </Col>
+                                ))
+                            ) : (
+                                <span>No results found.</span>
+                            )}
                         </Row>
 
 

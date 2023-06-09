@@ -6,31 +6,33 @@ import SearchBook from './SearchBook';
 
 
 class Library extends React.Component {
-    
-    state = {currentBooks: localStorage.getItem("currentBooks") ? JSON.parse(localStorage.getItem("currentBooks")) : [],
-             toReadBooks: localStorage.getItem("toReadBooks") ? JSON.parse(localStorage.getItem("toReadBooks")) : [],
-             readBooks: localStorage.getItem("readBooks") ? JSON.parse(localStorage.getItem("readBooks")) : [] };
+
+    state = {
+        currentBooks: localStorage.getItem("currentBooks") ? JSON.parse(localStorage.getItem("currentBooks")) : [],
+        toReadBooks: localStorage.getItem("toReadBooks") ? JSON.parse(localStorage.getItem("toReadBooks")) : [],
+        readBooks: localStorage.getItem("readBooks") ? JSON.parse(localStorage.getItem("readBooks")) : []
+    };
 
     __addBook(book, target) {
         console.log("Adding: " + book.title + " to " + target)
-        const bookList = this.state[target]; 
+        const bookList = this.state[target];
         bookList.push(book);
-        this.setState({[target]: bookList})
+        this.setState({ [target]: bookList })
         localStorage.setItem(target, JSON.stringify(bookList))
     }
 
     __removeBook(book, source) {
         console.log("Removing: " + book.title + " from " + source)
-        const bookList = this.state[source]; 
+        const bookList = this.state[source];
 
         const newBookList = bookList.filter(listBook => (this.__filterID(listBook, book)))
 
-        this.setState({[source]: newBookList})
+        this.setState({ [source]: newBookList })
         localStorage.setItem(source, JSON.stringify(newBookList))
     }
 
     __filterID = (listBook, book) => {
-        return listBook.key !== book.key; 
+        return listBook.key !== book.key;
     }
 
     moveBook = (book, target, source) => {
@@ -41,10 +43,10 @@ class Library extends React.Component {
     render() {
         return (
             <>
-            <CurrentlyReading currentBooks={this.state.currentBooks} move={this.moveBook}/>
-            <ToRead toReadBooks={this.state.toReadBooks} move={this.moveBook}/>
-            <Read readBooks={this.state.readBooks} move={this.moveBook}/>
-            <SearchBook addBookToCurrent={this.moveBook}/>
+                <CurrentlyReading currentBooks={this.state.currentBooks} move={this.moveBook} />
+                <ToRead toReadBooks={this.state.toReadBooks} move={this.moveBook} />
+                <Read readBooks={this.state.readBooks} move={this.moveBook} />
+                <SearchBook addBookToCurrent={this.moveBook} />
             </>
         )
     }

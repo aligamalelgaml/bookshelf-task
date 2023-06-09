@@ -8,8 +8,8 @@ class ToRead extends React.Component {
             <>
                 <Container className="mb-4">
                     <Row>
-                        <h3 className='mt-3'>To Read:</h3>
-                        <hr/>
+                        <h3 className='mt-3 fw-bold'>To Read:</h3>
+                        <hr />
 
                         {this.props.toReadBooks.map(book => (
                             <Col xs={3} key={book.key} className='mt-4'>
@@ -20,9 +20,12 @@ class ToRead extends React.Component {
                                         <Card.Text>
                                             <span>
                                                 {book.author_name ? (
-                                                    book.author_name.map((author, index) => {
-                                                        return <span className='text-grey fw-bold' key={index}>{author},</span>;
-                                                    })
+                                                    book.author_name.map((author, index) => (
+                                                        <React.Fragment key={index}>
+                                                            <span className='text-grey fw-bold'>{author}</span>
+                                                            {index !== book.author_name.length - 1 && <span className='text-grey'>, </span>}
+                                                        </React.Fragment>
+                                                    ))
                                                 ) : (
                                                     <span>N/A</span>
                                                 )}
@@ -30,16 +33,16 @@ class ToRead extends React.Component {
                                         </Card.Text>
                                     </Card.Body>
                                     <Card.Footer>
-                                    <Dropdown drop='down'>
-                                    <Dropdown.Toggle className='circle-small fs-5' variant="success" id="dropdown-basic"/>
+                                        <Dropdown drop='down'>
+                                            <Dropdown.Toggle className='circle-small fs-5' variant="success" id="dropdown-basic" />
 
-                                        <Dropdown.Menu>
-                                            <Dropdown.Item disabled="true" href="#">Move</Dropdown.Item>
-                                            <Dropdown.Item onClick={this.props.move.bind(this, book, "currentBooks", "toReadBooks")} href="#">Current Books</Dropdown.Item>
-                                            <Dropdown.Item onClick={this.props.move.bind(this, book, "readBooks", "toReadBooks")} href="#">Read Books</Dropdown.Item>
-                                            <Dropdown.Item onClick={this.props.move.bind(this, book, null, "toReadBooks")} href="#">Remove</Dropdown.Item>
-                                        </Dropdown.Menu>
-                                    </Dropdown>                                    
+                                            <Dropdown.Menu>
+                                                <Dropdown.Item disabled="true" href="#">Move</Dropdown.Item>
+                                                <Dropdown.Item onClick={this.props.move.bind(this, book, "currentBooks", "toReadBooks")} href="#">Current Books</Dropdown.Item>
+                                                <Dropdown.Item onClick={this.props.move.bind(this, book, "readBooks", "toReadBooks")} href="#">Read Books</Dropdown.Item>
+                                                <Dropdown.Item onClick={this.props.move.bind(this, book, null, "toReadBooks")} href="#">Remove</Dropdown.Item>
+                                            </Dropdown.Menu>
+                                        </Dropdown>
                                     </Card.Footer>
                                 </Card>
                             </Col>
