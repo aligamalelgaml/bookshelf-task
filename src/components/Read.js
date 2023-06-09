@@ -1,21 +1,23 @@
 import React from 'react';
 import { Container, Dropdown, Card, Row, Col } from 'react-bootstrap';
 
-class CurrentlyReading extends React.Component {
+class Read extends React.Component {
 
     render() {
         return (
             <>
                 <Container className="mb-4">
                     <Row>
-                        <h3 className='mt-3'>Currently Reading:</h3>
+                        <h3 className='mt-3'>To Read:</h3>
                         <hr/>
 
-                        {this.props.currentBooks.map(book => (
+                        {this.props.readBooks.map(book => (
                             <Col xs={3} key={book.key} className='mt-4'>
                                 <Card className='h-100'>
                                     <Card.Img variant="top" src={`https://covers.openlibrary.org/b/id/${book.cover_i}-M.jpg`} />
+                                    
                                     <Card.Title className='mt-3 ms-3'><span className='fs-5 fw-bold'>{book.title}</span></Card.Title>
+
                                     <Card.Body>
                                         <Card.Text>
                                             <span>
@@ -31,7 +33,6 @@ class CurrentlyReading extends React.Component {
                                     </Card.Body>
 
                                     <Card.Footer>
-
                                     <Dropdown drop='down'>
                                         <Dropdown.Toggle variant="success" id="dropdown-basic">
                                             Dropdown Button
@@ -39,14 +40,13 @@ class CurrentlyReading extends React.Component {
 
                                         <Dropdown.Menu>
                                             <Dropdown.Item disabled="true" href="#">Move</Dropdown.Item>
-                                            <Dropdown.Item onClick={this.props.move.bind(this, book, "toReadBooks", "currentBooks")} href="#">Want To Read Books</Dropdown.Item>
-                                            <Dropdown.Item onClick={this.props.move.bind(this, book, "readBooks", "currentBooks")} href="#">Read Books</Dropdown.Item>
-                                            <Dropdown.Item onClick={this.props.move.bind(this, book, null, "currentBooks")} href="#">Remove</Dropdown.Item>
+                                            <Dropdown.Item onClick={this.props.move.bind(this, book, "currentBooks", "readBooks")} href="#">Current Books</Dropdown.Item>
+                                            <Dropdown.Item onClick={this.props.move.bind(this, book, "toReadBooks", "readBooks")} href="#">Want To Read Books</Dropdown.Item>
+                                            <Dropdown.Item onClick={this.props.move.bind(this, book, null, "readBooks")} href="#">Remove</Dropdown.Item>
                                         </Dropdown.Menu>
-                                    </Dropdown>
-
-                                
+                                    </Dropdown>                                    
                                     </Card.Footer>
+
                                 </Card>
                             </Col>
                         ))}
@@ -59,4 +59,4 @@ class CurrentlyReading extends React.Component {
 
 }
 
-export default CurrentlyReading;
+export default Read;

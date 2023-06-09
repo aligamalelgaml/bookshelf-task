@@ -32,15 +32,14 @@ class SearchBook extends React.Component {
     }
 
     render() {
-        console.log(this.state.results);
         return (
             <>
                 <footer className='footer text-end pe-4'>
-                    <div className='footer-content'>
+                    <span className='footer-content'>
                         <Button className='circle fs-1' variant="primary" onClick={this.toggleModal}>
                             +
                         </Button>
-                    </div>
+                    </span>
                 </footer>
 
                 <Modal show={this.state.showModal} onHide={this.toggleModal} fullscreen>
@@ -59,11 +58,11 @@ class SearchBook extends React.Component {
                                         <Col xs={2} key={book.key} className='mt-5'>
                                             <Card className='h-100'>
                                                 <Card.Img variant="top" src={`https://covers.openlibrary.org/b/id/${book.cover_i}-M.jpg`}/>
+                                                <Card.Title className='mt-3 ms-3'><span className='fs-5 fw-bold'>{book.title}</span></Card.Title>
+
                                                 <Card.Body>
                                                     <Card.Text>
-                                                        <span className='fs-5 fw-bold'>{book.title}</span>
-
-                                                        <div>
+                                                        <span>
                                                             {book.author_name ? (
                                                                 book.author_name.map((author, index) => {
                                                                     return <span key={index}>{author},</span>;
@@ -71,7 +70,7 @@ class SearchBook extends React.Component {
                                                             ) : (
                                                                 <span>N/A</span>
                                                             )}
-                                                        </div>
+                                                        </span>
                                                     </Card.Text>
                                                 </Card.Body>
                                                 <Card.Footer>
