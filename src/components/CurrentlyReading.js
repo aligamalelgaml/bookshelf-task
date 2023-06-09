@@ -21,7 +21,7 @@ class CurrentlyReading extends React.Component {
                                             <span>
                                                 {book.author_name ? (
                                                     book.author_name.map((author, index) => {
-                                                        return <span key={index}>{author},</span>;
+                                                        return <span key={index} className='text-grey fw-bold'>{author},</span>;
                                                     })
                                                 ) : (
                                                     <span>N/A</span>
@@ -33,9 +33,7 @@ class CurrentlyReading extends React.Component {
                                     <Card.Footer>
 
                                     <Dropdown drop='down'>
-                                        <Dropdown.Toggle variant="success" id="dropdown-basic">
-                                            Dropdown Button
-                                        </Dropdown.Toggle>
+                                        <Dropdown.Toggle className='circle-small fs-5' variant="success" id="dropdown-basic"/>
 
                                         <Dropdown.Menu>
                                             <Dropdown.Item disabled="true" href="#">Move</Dropdown.Item>

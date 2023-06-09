@@ -7,13 +7,28 @@
 }
 
 .footer {
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
+    width: 100%;
+    position: fixed;
+    bottom: 0;
+    pointer-events: none;
+}
+
+.btn {
+    pointer-events: all;
+
+    &:hover{
+        background-color: darkgreen;
+    }
+}
+
+.text-grey {
+    color: #555555;
 }
 
 .footer-content {
-    flex-grow: 1;
+    margin-top: 50px;
+    margin-right: 50px;
+    padding-bottom: 25px;
     display: flex;
     flex-direction: row-reverse;
   }
@@ -25,7 +40,7 @@
     object-fit: cover;
 }
 
-.circle {
+.circle, .circle-small {
     width: 60px;
     height: 60px;
     border-radius: 50%;
@@ -36,4 +51,16 @@
     text-align: center;
     right: 20px;
   }
+  
+.circle-small {
+    @extend .circle;
+    width: 40px;
+    height: 40px;
+}
+
+.card-footer {
+    border-top: 0;
+    display: flex;
+    flex-direction: row-reverse;
+}
   

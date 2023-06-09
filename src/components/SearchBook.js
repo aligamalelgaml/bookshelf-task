@@ -34,7 +34,7 @@ class SearchBook extends React.Component {
     render() {
         return (
             <>
-                <footer className='footer text-end pe-4'>
+                <footer className='footer'>
                     <span className='footer-content'>
                         <Button className='circle fs-1' variant="primary" onClick={this.toggleModal}>
                             +
@@ -64,9 +64,12 @@ class SearchBook extends React.Component {
                                                     <Card.Text>
                                                         <span>
                                                             {book.author_name ? (
-                                                                book.author_name.map((author, index) => {
-                                                                    return <span key={index}>{author},</span>;
-                                                                })
+                                                                book.author_name.map((author, index) => (
+                                                                    <React.Fragment key={index}>
+                                                                    <span className='text-grey fw-bold'>{author}</span>
+                                                                    {index !== book.author_name.length - 1 && <span className='text-grey'>, </span>}
+                                                                    </React.Fragment>
+                                                                ))
                                                             ) : (
                                                                 <span>N/A</span>
                                                             )}
@@ -74,7 +77,7 @@ class SearchBook extends React.Component {
                                                     </Card.Text>
                                                 </Card.Body>
                                                 <Card.Footer>
-                                                    <Button key={book.key} className='rounded-circle' variant="primary" onClick={this.props.addBookToCurrent.bind(this, book)}>
+                                                    <Button key={book.key} className='rounded-circle' variant="primary" onClick={this.props.addBookToCurrent.bind(this, book, "currentBooks", null)}>
                                                         +
                                                     </Button>
                                                 </Card.Footer>

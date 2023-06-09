@@ -21,7 +21,7 @@ class ToRead extends React.Component {
                                             <span>
                                                 {book.author_name ? (
                                                     book.author_name.map((author, index) => {
-                                                        return <span key={index}>{author},</span>;
+                                                        return <span className='text-grey fw-bold' key={index}>{author},</span>;
                                                     })
                                                 ) : (
                                                     <span>N/A</span>
@@ -31,9 +31,7 @@ class ToRead extends React.Component {
                                     </Card.Body>
                                     <Card.Footer>
                                     <Dropdown drop='down'>
-                                        <Dropdown.Toggle variant="success" id="dropdown-basic">
-                                            Dropdown Button
-                                        </Dropdown.Toggle>
+                                    <Dropdown.Toggle className='circle-small fs-5' variant="success" id="dropdown-basic"/>
 
                                         <Dropdown.Menu>
                                             <Dropdown.Item disabled="true" href="#">Move</Dropdown.Item>
@@ -41,7 +39,8 @@ class ToRead extends React.Component {
                                             <Dropdown.Item onClick={this.props.move.bind(this, book, "readBooks", "toReadBooks")} href="#">Read Books</Dropdown.Item>
                                             <Dropdown.Item onClick={this.props.move.bind(this, book, null, "toReadBooks")} href="#">Remove</Dropdown.Item>
                                         </Dropdown.Menu>
-                                    </Dropdown>                                    </Card.Footer>
+                                    </Dropdown>                                    
+                                    </Card.Footer>
                                 </Card>
                             </Col>
                         ))}

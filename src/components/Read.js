@@ -15,7 +15,7 @@ class Read extends React.Component {
                             <Col xs={3} key={book.key} className='mt-4'>
                                 <Card className='h-100'>
                                     <Card.Img variant="top" src={`https://covers.openlibrary.org/b/id/${book.cover_i}-M.jpg`} />
-                                    
+
                                     <Card.Title className='mt-3 ms-3'><span className='fs-5 fw-bold'>{book.title}</span></Card.Title>
 
                                     <Card.Body>
@@ -23,7 +23,7 @@ class Read extends React.Component {
                                             <span>
                                                 {book.author_name ? (
                                                     book.author_name.map((author, index) => {
-                                                        return <span key={index}>{author},</span>;
+                                                        return <span className='text-grey fw-bold' key={index}>{author},</span>;
                                                     })
                                                 ) : (
                                                     <span>N/A</span>
@@ -34,9 +34,7 @@ class Read extends React.Component {
 
                                     <Card.Footer>
                                     <Dropdown drop='down'>
-                                        <Dropdown.Toggle variant="success" id="dropdown-basic">
-                                            Dropdown Button
-                                        </Dropdown.Toggle>
+                                        <Dropdown.Toggle className='circle-small fs-5' variant="success" id="dropdown-basic"/>
 
                                         <Dropdown.Menu>
                                             <Dropdown.Item disabled="true" href="#">Move</Dropdown.Item>

@@ -11,23 +11,15 @@ class Library extends React.Component {
              toReadBooks: localStorage.getItem("toReadBooks") ? JSON.parse(localStorage.getItem("toReadBooks")) : [],
              readBooks: localStorage.getItem("readBooks") ? JSON.parse(localStorage.getItem("readBooks")) : [] };
 
-    addBookToCurrent = (book) => {
-        console.log("Search adding current book: " + book.title)
-        const bookList = this.state.currentBooks; 
-        bookList.push(book);
-        this.setState({currentBooks: bookList})
-        localStorage.setItem("currentBooks", JSON.stringify(bookList))
-    }
-
-    addBook(book, target) {
-        console.log("Adding to be read book: " + book.title + " to " + target)
+    __addBook(book, target) {
+        console.log("Adding: " + book.title + " to " + target)
         const bookList = this.state[target]; 
         bookList.push(book);
         this.setState({[target]: bookList})
         localStorage.setItem(target, JSON.stringify(bookList))
     }
 
-    removeBook(book, source) {
+    __removeBook(book, source) {
         console.log("Removing: " + book.title + " from " + source)
         const bookList = this.state[source]; 
 
@@ -42,8 +34,8 @@ class Library extends React.Component {
     }
 
     moveBook = (book, target, source) => {
-        if (source !== null) this.removeBook(book, source);
-        if (target !== null) this.addBook(book, target);
+        if (source !== null) this.__removeBook(book, source);
+        if (target !== null) this.__addBook(book, target);
     }
 
     render() {
@@ -52,7 +44,7 @@ class Library extends React.Component {
             <CurrentlyReading currentBooks={this.state.currentBooks} move={this.moveBook}/>
             <ToRead toReadBooks={this.state.toReadBooks} move={this.moveBook}/>
             <Read readBooks={this.state.readBooks} move={this.moveBook}/>
-            <SearchBook addBookToCurrent={this.addBookToCurrent}/>
+            <SearchBook addBookToCurrent={this.moveBook}/>
             </>
         )
     }
