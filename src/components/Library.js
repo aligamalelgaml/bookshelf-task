@@ -1,8 +1,6 @@
 import React from 'react';
-import CurrentlyReading from './CurrentlyReading';
-import ToRead from './ToRead';
-import Read from './Read';
 import SearchBook from './SearchBook';
+import BookShelf from './BookShelf';
 
 
 class Library extends React.Component {
@@ -93,9 +91,10 @@ class Library extends React.Component {
     render() {
         return (
             <>
-                <CurrentlyReading currentBooks={this.state.currentBooks} move={this.moveBook} />
-                <ToRead toReadBooks={this.state.toReadBooks} move={this.moveBook} />
-                <Read readBooks={this.state.readBooks} move={this.moveBook} />
+                <BookShelf shelf={this.state.currentBooks} move={this.moveBook} shelfName={"Currently Reading"}/>
+                <BookShelf shelf={this.state.toReadBooks} move={this.moveBook} shelfName={"To Read"}/>
+                <BookShelf shelf={this.state.readBooks} move={this.moveBook} shelfName={"Read"}/>
+
                 <SearchBook move={this.moveBook} />
             </>
         )
@@ -103,3 +102,5 @@ class Library extends React.Component {
 }
 
 export default Library;
+
+/* <CurrentlyReading currentBooks={this.state.currentBooks} move={this.moveBook} /> */

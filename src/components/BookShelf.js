@@ -1,17 +1,17 @@
 import React from 'react';
 import { Container, Dropdown, Card, Row, Col } from 'react-bootstrap';
 
-class CurrentlyReading extends React.Component {
+class BookShelf extends React.Component {
 
     render() {
         return (
             <>
                 <Container className="mb-4">
                     <Row>
-                        <h3 className='mt-3 fw-bold'>Currently Reading:</h3>
+                        <h3 className='mt-3 fw-bold'>{this.props.shelfName}:</h3>
                         <hr />
 
-                        {this.props.currentBooks.map(book => (
+                        {this.props.shelf.map(book => (
                             <Col xs={3} key={book.key} className='mt-4'>
                                 <Card className='h-100'>
                                     <Card.Img variant="top" src={`https://covers.openlibrary.org/b/id/${book.cover_i}-M.jpg`} />
@@ -40,9 +40,26 @@ class CurrentlyReading extends React.Component {
 
                                             <Dropdown.Menu>
                                                 <Dropdown.Item disabled="true" href="#">Move</Dropdown.Item>
-                                                <Dropdown.Item onClick={this.props.move.bind(this, book, "toReadBooks", "currentBooks")} href="#">Want To Read Books</Dropdown.Item>
-                                                <Dropdown.Item onClick={this.props.move.bind(this, book, "readBooks", "currentBooks")} href="#">Read Books</Dropdown.Item>
-                                                <Dropdown.Item onClick={this.props.move.bind(this, book, null, "currentBooks")} href="#">Remove</Dropdown.Item>
+
+                                                { this.props.shelfName === "Currently Reading" ? 
+                                                    [<Dropdown.Item key={1} onClick={this.props.move.bind(this, book, "toReadBooks", "currentBooks")} href="#">Want To Read Books</Dropdown.Item>,
+                                                    <Dropdown.Item key={2} onClick={this.props.move.bind(this, book, "readBooks", "currentBooks")} href="#">Read Books</Dropdown.Item>,
+                                                    <Dropdown.Item key={3} onClick={this.props.move.bind(this, book, null, "currentBooks")} href="#">Remove</Dropdown.Item>
+
+                                                ] : (<></>)}
+
+                                                { this.props.shelfName === "To Read" ? 
+                                                    [<Dropdown.Item key={1} onClick={this.props.move.bind(this, book, "currentBooks", "toReadBooks")} href="#">Currently Reading Books</Dropdown.Item>,
+                                                    <Dropdown.Item key={2} onClick={this.props.move.bind(this, book, "readBooks", "toReadBooks")} href="#">Read Books</Dropdown.Item>,
+                                                    <Dropdown.Item key={3} onClick={this.props.move.bind(this, book, null, "toReadBooks")} href="#">Remove</Dropdown.Item>
+
+                                                ] : (<></>)}
+
+                                                { this.props.shelfName === "Read" ? 
+                                                    [<Dropdown.Item key={1} onClick={this.props.move.bind(this, book, "currentBooks", "readBooks")} href="#">Currently Reading Boks</Dropdown.Item>,
+                                                    <Dropdown.Item key={2} onClick={this.props.move.bind(this, book, "toReadBooks", "readBooks")} href="#">Want To Read Books</Dropdown.Item>,
+                                                    <Dropdown.Item key={3} onClick={this.props.move.bind(this, book, null, "readBooks")} href="#">Remove</Dropdown.Item>
+                                                ] : (<></>)}
                                             </Dropdown.Menu>
                                         </Dropdown>
 
@@ -60,4 +77,4 @@ class CurrentlyReading extends React.Component {
 
 }
 
-export default CurrentlyReading;
+export default BookShelf;
