@@ -102,5 +102,3 @@ class Library extends React.Component {
 }
 
 export default Library;
-
-/* <CurrentlyReading currentBooks={this.state.currentBooks} move={this.moveBook} /> */
